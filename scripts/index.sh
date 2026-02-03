@@ -8,6 +8,10 @@ GITHUB_USER="guritso"
 
 echo "[$(date)] Starting data update..." >> "$LOG_FILE"
 
+echo "creating output directories if not exist..." >> "$LOG_FILE"
+mkdir -p "$OUTPUT_DIR/recent_animes"
+mkdir -p "$OUTPUT_DIR/github_repos"
+
 # ========== UPDATE ANIME DATA ==========
 echo "[$(date)] Fetching anime data..." >> "$LOG_FILE"
 

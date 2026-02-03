@@ -73,6 +73,12 @@ for item in "${ITEMS[@]}"; do
 done
 
 echo "Files deployed successfully!"
+echo "Running index script..."  
+# Run the index script
+chmod +x $DEV_DIR/scripts/index.sh
+$DEV_DIR/scripts/index.sh
+
+echo "Index script executed!."
 echo "Reloading nginx..."
 
 # Reload nginx
