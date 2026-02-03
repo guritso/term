@@ -20,4 +20,12 @@ sudo ./deploy.sh
 # http://localhost:80
 ```
 
-see `./nginx.conf`
+# Crontab
+
+Every 12 hours
+```
+* */12 * * * /usr/share/nginx/html/scripts/index.sh
+
+```
+
+See `./nginx.conf`, `./deploy.sh` and `scripts/index.sh`

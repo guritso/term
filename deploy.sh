@@ -76,9 +76,13 @@ echo "Files deployed successfully!"
 echo "Running index script..."  
 # Run the index script
 chmod +x $DEV_DIR/scripts/index.sh
-$DEV_DIR/scripts/index.sh
+sudo $DEV_DIR/scripts/index.sh
 
 echo "Index script executed!."
+echo "Adding script to cron..."
+# Add cron job if not already present
+cat $DEV_DIR/crontabs/root | sudo crontab -u root -
+echo "Cron job added."
 echo "Reloading nginx..."
 
 # Reload nginx
