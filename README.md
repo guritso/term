@@ -1,6 +1,6 @@
 # term
 
-A simple site with latest animes and github repositories.
+A static minimalist site with latest animes and github repositories.
 
 # dev
 
