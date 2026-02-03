@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+        <title>guritso</title>
+        <style>
+            :root {
+                --bg: #0a0a0a;
+                --text: #c0c0c0;
+                --accent: #4ade80;
+                --dim: #555;
+                --link-hover: #fff;
+            }
+            body {
+                background-color: var(--bg);
+                color: var(--text);
+                font-family: "Courier New", Courier, monospace;
+                margin: 0;
+                padding: 2rem;
+                line-height: 1.4;
+                max-width: 900px;
+                margin: 0 auto;
+                font-size: 14px;
+		overflow: auto;
+            }
+            h1 {
+                font-size: 14px;
+                margin: 0 0 2rem 0;
+                font-weight: normal;
+                color: var(--accent);
+            }
+            h2 {
+                font-size: 14px;
+                color: var(--accent);
+                margin: 0;
+                font-weight: bold;
+            }
+            .filters {
+                margin-bottom: 1rem;
+                font-size: 12px;
+            }
+            .filter-btn {
+                cursor: pointer;
+                user-select: none;
+            }
+            .filter-btn.active {
+                color: var(--accent);
+            }
+            .filter-btn:not(.active) {
+                color: var(--dim);
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            li {
+                margin-bottom: 0.2rem;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                overflow: hidden;
+                position: relative;
+            }
+            a {
+                color: var(--text);
+                text-decoration: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            a:hover {
+                color: var(--link-hover);
+                text-decoration: underline;
+                background-color: transparent;
+            }
+            .perm {
+                width: 90px;
+                flex-shrink: 0;
+            }
+            .size {
+                width: 50px;
+                margin-right: 1rem;
+                text-align: right;
+                flex-shrink: 0;
+                color: var(--dim);
+            }
+            .score {
+                width: 40px;
+                margin: 0 1rem;
+                text-align: right;
+                flex-shrink: 0;
+            }
+            .status {
+                width: 100px;
+                margin-right: 1rem;
+                flex-shrink: 0;
+                color: var(--dim);
+            }
+            .repo-name {
+                width: 150px;
+                flex-shrink: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 1rem;
+            }
+            .anime-name {
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 1rem;
+            }
+            .ep {
+                color: var(--dim);
+                position: absolute;
+                right: 0;
+                flex-shrink: 0;
+                background-color: var(--bg);
+                padding-left: 0.3rem;
+            }
+            .tag {
+                color: var(--dim);
+                margin-left: 0.5rem;
+                flex-shrink: 0;
+            }
+            .stars {
+                color: var(--dim);
+                position: absolute;
+                right: 0;
+                flex-shrink: 0;
+                background-color: var(--bg);
+                padding-left: 0.3rem;
+            }
+            .desc {
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 1rem;
+            }
+            .meta {
+                color: #fff;
+            }
+            .loading {
+                color: var(--dim);
+            }
+            .error {
+                color: #ff5555;
+            }
+            /* Mobile Styles */
+            @media (max-width: 768px) {
+                body {
+                    padding: 1rem;
+                    font-size: 12px;
+                }
+                h1 {
+                    font-size: 12px;
+                    margin-bottom: 1.5rem;
+                    word-break: break-all;
+                }
+                h2 {
+                    font-size: 12px;
+                }
+                .filters {
+                    font-size: 10px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                }
+
+                li {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-bottom: 1rem;
+                    white-space: normal;
+                    border-bottom: 1px solid var(--dim);
+                    padding-bottom: 0.5rem;
+                }
+                .perm {
+                    width: auto;
+                    font-size: 10px;
+                    margin-bottom: 0.2rem;
+                }
+                .size {
+                    width: auto;
+                    margin-right: 0.5rem;
+                    display: inline;
+                }
+                .repo-name,
+                .anime-name {
+                    width: 100%;
+                    margin: 0.3rem 0;
+                    font-weight: bold;
+                    white-space: normal;
+                    word-break: break-word;
+                }
+                .desc {
+                    width: 100%;
+                    white-space: normal;
+                    word-break: break-word;
+                    margin: 0.3rem 0;
+                    font-size: 11px;
+                }
+                .stars {
+                    width: auto;
+                    margin-left: 0;
+                    margin-top: 0.3rem;
+                }
+                .score {
+                    width: auto;
+                    margin: 0.3rem 0.5rem 0.3rem 0;
+                    display: inline;
+                }
+                .status {
+                    width: auto;
+                    margin-right: 0.5rem;
+                    display: inline;
+                }
+                .ep {
+                    margin-top: 0.3rem;
+                    display: block;
+                }
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    padding: 0.75rem;
+                    font-size: 11px;
+                }
+                h1 {
+                    font-size: 11px;
+                    margin-bottom: 1rem;
+                }
+                h2 {
+                    font-size: 11px;
+                }
+                .filters {
+                    font-size: 9px;
+                }
+                .perm {
+                    display: none; /* Esconde permissões em telas muito pequenas */
+                }
+                .desc {
+                    font-size: 10px;
+                }
+            }
+            /* Landscape mobile */
+            @media (max-width: 768px) and (orientation: landscape) {
+                body {
+                    padding: 1rem 2rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>guritso@home:~$ ./scripts/index.sh</h1>
+        </header>
+        <main>
+            <section>
+                <div
+                    style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-top: 2rem;
+                        margin-bottom: 0.5rem;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                    "
+                >
+                    <a style="color:var(--accent)" href="/github_repos">./github_repos/</a>
+                    <div class="filters">
+                        <span class="filter-btn" data-type="forked">forked</span>
+                        <span class="filter-btn" data-type="archived">archived</span>
+                    </div>
+                </div>
+                <ul id="github-list" class="loading">
+                    <li>loading...</li>
+                </ul>
+            </section>
+            <section id="anime-section" style="display: none;">
+                <div
+                    style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-top: 2rem;
+                        margin-bottom: 0.5rem;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                    "
+                >
+                    <a style="color:var(--accent)" href="/recent_animes" >./recent_animes/</a>
+                    <div class="filters">
+                        <span class="filter-btn active" data-status="1">watching</span>
+                        <span class="filter-btn active" data-status="2">completed</span>
+                        <span class="filter-btn" data-status="3">on-hold</span>
+                        <span class="filter-btn" data-status="4">dropped</span>
+                        <span class="filter-btn" data-status="6">planning</span>
+                    </div>
+                </div>
+                <ul id="anime-list" class="loading">
+                    <li>loading...</li>
+                </ul>
+            </section>
+        </main>
+        <script>
+            const REPO_DATA_URL = "/github_repos/repo-data.json";
+            const ANIME_DATA_URL = "/recent_animes/anime-data.json";
+
+            let allRepos = [];
+            let allAnimes = [];
+
+            const repoFilters = {
+                forked: false,
+                archived: false,
+            };
+
+            const animeFilters = {
+                1: true,
+                2: true,
+                3: false,
+                4: false,
+                6: false,
+            };
+
+            function getStatusText(status) {
+                switch (parseInt(status)) {
+                    case 1:
+                        return "watching";
+                    case 2:
+                        return "completed";
+                    case 3:
+                        return "on-hold";
+                    case 4:
+                        return "dropped";
+                    case 6:
+                        return "planning";
+                    default:
+                        return "unknown";
+                }
+            }
+
+            function renderRepos() {
+                const container = document.getElementById("github-list");
+
+                let filtered = allRepos.filter((repo) => {
+                    if (repo.fork && !repoFilters.forked) return false;
+                    if (repo.archived && !repoFilters.archived) return false;
+                    return true;
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = "<li>no repos match filters</li>";
+                    return;
+                }
+
+                container.innerHTML = filtered
+                    .map(
+                        (repo) => `
+                 <li>
+                     <span class="perm">-rwxr-xr-x</span>
+                     <span class="size">${repo.size || 0}kb</span>
+                     <a href="${repo.html_url}" target="_blank" class="repo-name">${repo.name}</a>
+                     <span class="desc"># ${repo.description ? repo.description : "no_desc"}</span>
+                     <span class="stars">[★${repo.stargazers_count}]</span>
+                 </li>
+             `
+                    )
+                    .join("");
+                container.classList.remove("loading");
+            }
+
+            function renderAnimes() {
+                const container = document.getElementById("anime-list");
+
+                let filtered = allAnimes.filter((anime) => animeFilters[anime.status]);
+                filtered.sort((a, b) => a.status - b.status);
+
+                if (filtered.length === 0) {
+                    container.innerHTML = "<li>no animes match filters</li>";
+                    return;
+                }
+
+                container.innerHTML = filtered
+                    .map((anime) => {
+                        const watched = String(anime.num_watched_episodes).padStart(2, "0");
+                        const total = anime.anime_num_episodes
+                            ? String(anime.anime_num_episodes).padStart(2, "0")
+                            : "??";
+                        return `
+                 <li>
+                     <span class="perm">-rw-r--r--</span>
+                     <span class="score">${anime.score || 0}/10</span>
+                     <span class="status">${getStatusText(anime.status)}</span>
+                     <a href="https://myanimelist.net${anime.anime_url}" target="_blank" class="anime-name">${anime.anime_title}</a>
+                     <span class="ep">ep:${watched}/${total}</span>
+                 </li>
+             `;
+                    })
+                    .join("");
+                container.classList.remove("loading");
+            }
+
+            async function fetchRepos() {
+                try {
+                    const res = await fetch(REPO_DATA_URL);
+                    allRepos = await res.json();
+                    renderRepos();
+                    // Show anime section after repos loaded
+                    document.getElementById("anime-section").style.display = "block";
+                } catch (e) {
+                    document.getElementById("github-list").innerHTML =
+                        `<li class="error">err: failed to load repo data</li>`;
+                }
+            }
+
+            async function fetchAnimes() {
+                try {
+                    const res = await fetch(ANIME_DATA_URL);
+                    allAnimes = await res.json();
+                    renderAnimes();
+                } catch (e) {
+                    document.getElementById("anime-list").innerHTML =
+                        `<li class="error">err: failed to load anime data</li>`;
+                }
+            }
+
+            document.querySelectorAll(".filter-btn[data-status]").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const status = parseInt(btn.dataset.status);
+                    animeFilters[status] = !animeFilters[status];
+                    btn.classList.toggle("active", animeFilters[status]);
+                    renderAnimes();
+                });
+            });
+
+            document.querySelectorAll(".filter-btn[data-type]").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const type = btn.dataset.type;
+                    repoFilters[type] = !repoFilters[type];
+                    btn.classList.toggle("active", repoFilters[type]);
+                    renderRepos();
+                });
+            });
+
+            fetchRepos();
+            fetchAnimes();
+        </script>
+    </body>
+</html>

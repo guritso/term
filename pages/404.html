@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>404 - guritso</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #c0c0c0;
+            --accent: #4ade80;
+            --dim: #555;
+            --error: #ff5555;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.4;
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        h1 { 
+            font-size: 14px; 
+            margin: 0 0 2rem 0; 
+            font-weight: normal;
+            color: var(--accent);
+        }
+
+        .error-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .error-code {
+            color: var(--error);
+            font-size: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            color: var(--text);
+            margin-bottom: 2rem;
+        }
+
+        .suggestions {
+            color: var(--dim);
+        }
+
+        .suggestions a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .suggestions a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        pre {
+            margin: 0;
+            color: var(--dim);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>guritso@home:~$</h1>
+    </header>
+
+    <div class="error-container">
+        <div class="error-code">$ echo $?</div>
+        <div class="error-code">404</div>
+        
+        <div class="error-message">
+            <pre>-bash: /404: No such file or directory</pre>
+        </div>
+
+        <div class="suggestions">
+            <span>try: </span>
+            <a href="/">./index.html</a>
+            <span> or </span>
+            <a href="https://github.com/guritso">./github</a>
+            <span> or </span>
+            <a href="https://myanimelist.net/animelist/guritso">./anime-list</a>
+        </div>
+    </div>
+</body>
+</html>
