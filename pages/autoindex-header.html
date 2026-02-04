@@ -1,7 +1,15 @@
 <style>
+    :root {
+        --bg: #0a0a0a;
+        --text: #c0bbb3;
+        --accent: #4ade80;
+        --dim: #967070;
+        --link-hover: #fff;
+    }
+
     body {
-        background-color: #0a0a0a;
-        color: #c0c0c0;
+        background-color: var(--bg);
+        color: var(--text);
         font-family: 'Courier New', Courier, monospace;
         margin: 0;
         padding: 2rem;
@@ -15,11 +23,11 @@
         font-size: 14px;
         margin: 0 0 2rem 0;
         font-weight: normal;
-        color: #4ade80;
+        color: var(--accent);
     }
 
     a {
-        color: #4ade80;
+        color: var(--accent);
         text-decoration: none;
     }
 
@@ -36,9 +44,9 @@
     th {
         text-align: left;
         padding: 0.5rem;
-        color: #4ade80;
+        color: var(--accent);
         font-weight: bold;
-        border-bottom: 1px solid #555;
+        border-bottom: 1px solid var(--dim);
     }
 
     td {
@@ -46,23 +54,23 @@
     }
 
     tr:hover {
-        background-color: #1a1a1a;
+        background-color: var(--bg);
     }
 
     td:nth-child(3) {
-        color: #555;
+        color: var(--dim);
         text-align: right;
         width: 100px;
     }
 
     td:nth-child(2) {
-        color: #555;
+        color: var(--dim);
         width: 200px;
     }
 
     hr {
         border: none;
-        border-top: 1px solid #555;
+        border-top: 1px solid var(--dim);
         margin: 2rem 0;
     }
 
