@@ -1,39 +1,51 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="color-scheme" content="dark" />
-        <style>
-            body {
-                background-color: var(--bg);
-                color: var(--text);
-                font-family: "Courier New", Courier, monospace;
-                margin: 0;
-                padding: 2rem;
-                line-height: 1.6;
-                max-width: 900px;
-                margin: 0 auto;
-                font-size: 14px;
-                display: flex;
-                flex-direction: column;
-                justify-content: top;
-                min-height: 100vh;
-                overflow: hidden;
-            }
-            a {
-                color: #4ade80;
-                text-decoration: none;
-            }
-            a:hover {
-                color: #fff;
-            }
-            h1 {
-                color: #4ade80;
-                font-size: 14px;
-            }
-        </style>
-    </head>
-    <body>
-        <pre></pre>
-    </body>
-</html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #c0c0c0;
+            --accent: #4ade80;
+            --dim: #555;
+            --link-hover: #fff;
+        }
+
+        html {
+            justify-items: center;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            font-family: 'Courier New', Courier, monospace;
+            flex-direction: column;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        pre {
+            margin: 0;
+            padding: 0;
+            width: 900px;
+        }
+
+        a {
+            color: #4ade80;
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 14px;
+            margin: 0 0 2rem 0;
+            font-weight: normal;
+            color: var(--accent);
+        }
+    </style>
+</head>
