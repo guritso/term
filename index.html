@@ -47,6 +47,9 @@
         .filters {
             margin-bottom: 1rem;
             font-size: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .filter-btn {
@@ -206,6 +209,7 @@
                 white-space: normal;
                 border-bottom: 1px solid var(--dim);
                 padding-bottom: 0.5rem;
+                padding-right: 0;
             }
 
             .perm {
@@ -238,9 +242,12 @@
             }
 
             .stars {
+                position: static;
                 width: auto;
                 margin-left: 0;
                 margin-top: 0.3rem;
+                padding-left: 0;
+                background-color: transparent;
             }
 
             .score {
@@ -256,8 +263,11 @@
             }
 
             .ep {
+                position: static;
                 margin-top: 0.3rem;
                 display: block;
+                padding-left: 0;
+                background-color: transparent;
             }
         }
 

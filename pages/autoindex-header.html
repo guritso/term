@@ -1,51 +1,107 @@
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
-    <style>
-        :root {
-            --bg: #0a0a0a;
-            --text: #c0c0c0;
-            --accent: #4ade80;
-            --dim: #555;
-            --link-hover: #fff;
-        }
+<style>
+    body {
+        background-color: #0a0a0a;
+        color: #c0c0c0;
+        font-family: 'Courier New', Courier, monospace;
+        margin: 0;
+        padding: 2rem;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+        font-size: 14px;
+    }
 
-        html {
-            justify-items: center;
-        }
+    h1 {
+        font-size: 14px;
+        margin: 0 0 2rem 0;
+        font-weight: normal;
+        color: #4ade80;
+    }
 
+    a {
+        color: #c0c0c0;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th {
+        text-align: left;
+        padding: 0.5rem;
+        color: #4ade80;
+        font-weight: bold;
+        border-bottom: 1px solid #555;
+    }
+
+    td {
+        padding: 0.5rem;
+    }
+
+    tr:hover {
+        background-color: #1a1a1a;
+    }
+
+    td:nth-child(3) {
+        color: #555;
+        text-align: right;
+        width: 100px;
+    }
+
+    td:nth-child(2) {
+        color: #555;
+        width: 200px;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #555;
+        margin: 2rem 0;
+    }
+
+    pre {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Mobile responsivo */
+    @media (max-width: 768px) {
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            font-family: 'Courier New', Courier, monospace;
-            flex-direction: column;
-            padding: 2rem;
-            margin: 0 auto;
-        }
-
-        pre {
-            margin: 0;
-            padding: 0;
-            width: 900px;
-        }
-
-        a {
-            color: #4ade80;
-            text-decoration: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        a:hover {
-            color: #fff;
+            padding: 1rem;
+            font-size: 12px;
         }
 
         h1 {
-            font-size: 14px;
-            margin: 0 0 2rem 0;
-            font-weight: normal;
-            color: var(--accent);
+            font-size: 12px;
+            word-break: break-all;
         }
-    </style>
+
+        table {
+            font-size: 11px;
+        }
+
+        td:nth-child(2),
+        th:nth-child(2) {
+            display: none;
+        }
+
+        td:nth-child(3) {
+            width: 60px;
+            font-size: 10px;
+        }
+    }
+</style>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
