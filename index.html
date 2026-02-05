@@ -414,6 +414,7 @@
                 const link = document.createElement('a');
                 link.href = repo.html_url;
                 link.target = '_blank';
+                link.rel = 'noopener noreferrer';
                 link.className = 'repo-name';
                 link.textContent = repo.name;
 
@@ -473,6 +474,7 @@
                 const link = document.createElement('a');
                 link.href = `https://myanimelist.net${anime.anime_url}`;
                 link.target = '_blank';
+                link.rel = 'noopener noreferrer';
                 link.className = 'anime-name';
                 link.textContent = anime.anime_title;
 
@@ -502,6 +504,7 @@
             } catch (e) {
                 document.getElementById("github-list").innerHTML =
                     `<li class="error">err: failed to load repo data</li>`;
+                document.getElementById("anime-section").style.display = "block";
             }
         }
 
