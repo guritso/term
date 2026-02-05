@@ -2,7 +2,7 @@
 
 A static minimalist site with latest animes and github repositories.
 
-# dev
+## dev
 
 ```bash
 python -m http.server 8081
@@ -20,7 +20,7 @@ sudo ./deploy.sh
 # http://localhost:80
 ```
 
-# Crontab
+## Crontab
 
 Every 12 hours
 ```
