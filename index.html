@@ -342,6 +342,14 @@
         </section>
     </main>
     <script>
+        (function ensureAutoindexHeader() {
+            if (document.documentElement && document.documentElement.lang) return;
+            fetch('/pages/autoindex-header.html')
+                .then(r => r.text())
+                .then(html => document.body.insertAdjacentHTML('afterbegin', html))
+                .catch(() => {});
+        })();
+
         const REPO_DATA_URL = "/github_repos/repo-data.json";
         const ANIME_DATA_URL = "/recent_animes/anime-data.json";
 
