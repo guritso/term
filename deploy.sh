@@ -80,9 +80,15 @@ sudo $DEV_DIR/scripts/index.sh
 
 echo "Index script executed!."
 echo "Adding script to cron..."
-# Add cron job if not already present
-cat $DEV_DIR/crontabs/root | sudo crontab -u root -
-echo "Cron job added."
+# Add cron job without clobbering existing root crontab
+CRON_LINE="$(cat "$DEV_DIR/crontabs/root")"
+EXISTING_CRON="$(sudo crontab -u root -l 2>/dev/null || true)"
+if ! echo "$EXISTING_CRON" | grep -Fq "$CRON_LINE"; then
+    (printf "%s\n" "$EXISTING_CRON"; printf "%s\n" "$CRON_LINE") | sudo crontab -u root -
+    echo "Cron job added."
+else
+    echo "Cron job already present."
+fi
 echo "Reloading nginx..."
 
 # Reload nginx
