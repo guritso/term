@@ -6,6 +6,15 @@ LOG_FILE="/var/log/index-update.log"
 MAL_USER="guritso"
 GITHUB_USER="guritso"
 
+# Basic log rotation to avoid unbounded growth
+if [ -f "$LOG_FILE" ]; then
+    LOG_SIZE=$(wc -c < "$LOG_FILE" 2>/dev/null || echo "0")
+    if [ "$LOG_SIZE" -gt 5242880 ]; then
+        mv "$LOG_FILE" "${LOG_FILE}.1" 2>/dev/null || true
+        : > "$LOG_FILE"
+    fi
+fi
+
 echo "[$(date)] Starting data update..." >> "$LOG_FILE"
 
 echo "creating output directories if not exist..." >> "$LOG_FILE"
@@ -109,11 +118,14 @@ rm -rf "$TEMP_DIR"
 echo "[$(date)] Fetching repo data..." >> "$LOG_FILE"
 
 PAGE=1
-REPO_ALL="$OUTPUT_DIR/repo-data.json.tmp"
+REPO_TEMP_DIR="/tmp/repo-update-$$"
+mkdir -p "$REPO_TEMP_DIR"
+
+REPO_ALL="$REPO_TEMP_DIR/repo-data.json.tmp"
 echo "[]" > "$REPO_ALL"
 
 while true; do
-    REPO_CHUNK="$OUTPUT_DIR/repo_chunk_$PAGE.json"
+    REPO_CHUNK="$REPO_TEMP_DIR/repo_chunk_$PAGE.json"
     
     curl -s "https://api.github.com/users/$GITHUB_USER/repos?sort=updated&per_page=100&page=$PAGE" \
       -H "User-Agent: Mozilla/5.0" \
@@ -186,8 +198,8 @@ for item in all_data:
         'archived': item.get('archived')
     })
 
-with open('$OUTPUT_DIR/github_repos/repo-data.json', 'w') as f:
-    json.dump(filtered, f)
+    with open('$OUTPUT_DIR/github_repos/repo-data.json', 'w') as f:
+        json.dump(filtered, f)
 
 print(f"✓ Repos filtered: {len(filtered)} items")
 EOF
@@ -198,5 +210,6 @@ else
     echo "[$(date)] ✗ Failed to update repos" >> "$LOG_FILE"
 fi
 
-echo "[$(date)] === Update complete ===" >> "$LOG_FILE"
+rm -rf "$REPO_TEMP_DIR"
 
+echo "[$(date)] === Update complete ===" >> "$LOG_FILE"
