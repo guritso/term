@@ -18,7 +18,7 @@ fetch('/pages/autoindex-header.html')
 
 ## Deploy
 
-```
+```bash
 sudo ./deploy.sh
 
 # /usr/share/nginx/html
