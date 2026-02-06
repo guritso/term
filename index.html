@@ -342,6 +342,7 @@
         </section>
     </main>
     <script>
+        // Dev mode only: autoindex header injection for http.server.
         (function ensureAutoindexHeader() {
             if (document.documentElement && document.documentElement.lang) return;
             fetch('/pages/autoindex-header.html')
