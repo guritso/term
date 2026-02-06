@@ -10,7 +10,7 @@ python -m http.server 8081
 # http://127.0.0.1:8081
 ```
 
-Note: a brief white flash (FOUC) can happen only in dev mode.
+> Note: a brief white flash (FOUC) can happen only in dev mode.
 
 ## Deploy
 
